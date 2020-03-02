@@ -4,6 +4,7 @@ project(rvip_roi_parser)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
+  darknet_ros_msgs
   rospy
   roscpp
   std_msgs
