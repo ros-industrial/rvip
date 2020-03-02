@@ -1,0 +1,4 @@
+- tar:
+    local-name: darknet_ros_msgs
+    uri: https://github.com/leggedrobotics/darknet_ros-release/archive/release/kinetic/darknet_ros_msgs/1.1.4-0.tar.gz
+    version: darknet_ros-release-release-kinetic-darknet_ros_msgs-1.1.4-0

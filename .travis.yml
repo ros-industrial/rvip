@@ -15,6 +15,7 @@ env:
     - CATKIN_LINT=true
     - CCACHE_DIR=$HOME/.ccache
     - ROS_REPO=ros
+    - UPSTREAM_WORKSPACE=file
   matrix:
     - ROS_DISTRO="melodic"
 
