@@ -10,7 +10,6 @@ find_package(catkin REQUIRED COMPONENTS
   roslint
   pcl_ros
   std_msgs
-  roslaunch
   cv_bridge
   sensor_msgs
   geometry_msgs
@@ -28,8 +27,6 @@ include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS} ${OpenGR_
 
 link_directories(${PCL_LIBRARY_DIRS} )
 add_definitions(${PCL_DEFINITIONS} )
-
-roslaunch_add_file_check(launch)
 
 catkin_package( CATKIN_DEPENDS
   std_msgs
@@ -52,6 +49,9 @@ if(CATKIN_ENABLE_TESTING AND ENABLE_COVERAGE_TESTING)
 endif()
 
 if(CATKIN_ENABLE_TESTING)
+  find_package(roslaunch REQUIRED)
+  roslaunch_add_file_check(launch)
+
   find_package(rostest REQUIRED)
   add_rostest_gtest(test_rvip test/run_test.test src/test/test_rvip.cpp)
   target_link_libraries(test_rvip ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
