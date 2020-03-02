@@ -11,6 +11,7 @@ git:
 
 env:
   global:
+    - BEFORE_INSTALL_TARGET_DEPENDENCIES='./install_opengr.sh'
     - CATKIN_LINT=true
     - CCACHE_DIR=$HOME/.ccache
     - ROS_REPO=ros
