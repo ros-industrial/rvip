@@ -21,9 +21,6 @@ find_package(catkin REQUIRED COMPONENTS
 find_package(OpenGR REQUIRED PATHS /usr/local/lib/cmake)
 find_package(PCL 1.8 REQUIRED)
 
-include_directories(include ${catkin_INCLUDE_DIRS} ${PCL_INCLUDE_DIRS} ${OpenGR_INCLUDE_DIRS})
-
-link_directories(${PCL_LIBRARY_DIRS} )
 add_definitions(${PCL_DEFINITIONS} )
 
 catkin_package( CATKIN_DEPENDS
