@@ -12,21 +12,17 @@ By taking in both **2D RGB images** with **3D PointCloud** information, RVIP com
 This is done so in an effort to ensure higher reliability and reduced volatility of object localization results, needed for safer robot-human collaboration spaces.
 
 For a detailed documentation on RVIP, please execute the following commands:
-1. Clone this repository into the `src` folder of your catkin workspace.
 
-> ` $ git clone https://github.com/cardboardcode/rvip.git`
-
-2. Install **rosdoc_lite**.
-
-> `$ sudo apt install ros-melodic-rosdoc-lite`
-
-3. Go to the `rvip` subdirectory and run rosdoc_lite command
-
-> `$ cd rvip && rosdoc_lite .`
-
-4. View the documentation on your browser.
-
-> `$ firefox doc/html/doc/index.html `
+``` bash
+# Clone this repository into the `src` folder of your catkin workspace.
+git clone https://github.com/cardboardcode/rvip.git`
+# Install **rosdoc_lite**.
+sudo apt install ros-melodic-rosdoc-lite`
+# Go to the `rvip` subdirectory and run rosdoc_lite command
+cd rvip && rosdoc_lite .
+# View the documentation on your browser.
+firefox doc/html/doc/index.html
+```
 
 ## How Does It Work?
 
