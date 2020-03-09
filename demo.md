@@ -66,25 +66,19 @@ Eg. In my own use case, I use a Kinect v2 One Depth Sensor. The **topics** and `
 
 ### **[OpenGR Setup]**
 
-1. **Download** the OpenGR library source codes from its GitHub repo.
-> `$ git clone https://github.com/STORM-IRIT/OpenGR.git`
+Execute the commands below in terminal to **install** the **OpenGR** library.
 
-2. **Go** into the **OpenGR** directory
-> `$ cd OpenGR`
-3. **Git Revert** to the specified version of OpenGR.
-> `$ git reset --hard 0967cd880950b35786b8fd098837c9eb1fe2aca4`
+ `$ git clone https://github.com/STORM-IRIT/OpenGR.git`
 
-![](img/opengr_commit.png)
-**Click** [here](https://github.com/STORM-IRIT/OpenGR/commit/0967cd880950b35786b8fd098837c9eb1fe2aca4) to go to the webpage with this commit.
+ `$ cd OpenGR`
 
-4. **Create** and **Go** to a build directory
-> `$ mkdir build && cd build`
+ `$ git reset --hard 0967cd880950b35786b8fd098837c9eb1fe2aca4`
 
-5. **Build** the **OpenGR** using cmake.
-> `$ cmake -DCMAKE_BUILD_TYPE=Release ..`
+ `$ mkdir build && cd build`
 
-6. **Install** the **OpenGR** into your local workstation.
-> `$ sudo make install`
+ `$ cmake -DCMAKE_BUILD_TYPE=Release ..`
+
+ `$ sudo make install`
 
 ### **[darknet_ros Setup]**
 
