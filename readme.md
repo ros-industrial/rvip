@@ -29,8 +29,8 @@ firefox doc/html/doc/index.html
 The flow of data using RVIP is illustrated in the following diagram.
 
 **Inputs**:
-1. 3D PointCloud (sensor_msgs::PointCloud2)
-2. 2D RGB Camera Image (sensor_msgs::Image)
+1. 3D PointCloud (`sensor_msgs::PointCloud2`)
+2. 2D RGB Camera Image (`sensor_msgs::Image`)
 
 **Outputs**:
 1. Object Centroid Position, Orientation and Dimensions (visualisation_msgs::MarkerArray,tf::Transform)
