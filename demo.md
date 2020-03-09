@@ -101,7 +101,7 @@ This removes reliance of CUDA temporarily to run **darknet_ros** YOLO object det
 
 ### **[RVIP Setup]**
 
-1. **Download** this repository via SSH into the `src` directory of your **catkin** workspace.
+1. **Download** this repository into the `src` directory of your **catkin** workspace.
 > `$ cd path/to/your/<workspace_name>/src`
 >
 > `$ git clone https://github.com/cardboardcode/rvip.git`
