@@ -17,8 +17,6 @@ find_package(catkin REQUIRED COMPONENTS
   visualization_msgs
 )
 
-roslint_cpp()
-
 # DEPENDENCIES
 find_package(OpenGR REQUIRED PATHS /usr/local/lib/cmake)
 find_package(PCL 1.8 REQUIRED)
@@ -49,6 +47,7 @@ if(CATKIN_ENABLE_TESTING AND ENABLE_COVERAGE_TESTING)
 endif()
 
 if(CATKIN_ENABLE_TESTING)
+  roslint_cpp()
   find_package(roslaunch REQUIRED)
   roslaunch_add_file_check(launch)
 
