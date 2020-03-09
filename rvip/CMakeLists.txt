@@ -24,9 +24,17 @@ find_package(PCL 1.8 REQUIRED)
 add_definitions(${PCL_DEFINITIONS} )
 
 catkin_package( CATKIN_DEPENDS
-  std_msgs
-  sensor_msgs
+  cv_bridge
   geometry_msgs
+  image_transport
+  pcl_ros
+  roscpp
+  roslint
+  rospy
+  sensor_msgs
+  std_msgs
+  tf
+  visualization_msgs
 )
 
 include_directories(
