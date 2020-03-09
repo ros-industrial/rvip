@@ -33,18 +33,18 @@ This **suite** is made of:
 ### This section provides instructions on how you can connect **RVIP** to your ROS-supported **Depth Sensor/Camera**.  
 `Ensure that you have finished setup before doing this!`
 
-1. **Identify** **topics** and **frame_id** which your **Depth Sensor/Camera** is publishing the following information on:
+1. **Identify** **topics** and `frame_id` TF frame which your **Depth Sensor/Camera** is publishing the following information on:
 
 > `3D PointCloud`
 >
 > `Rectified 2D RGB Image`
 
-Eg. In my own use case, I use a Kinect v2 One Depth Sensor. The **topics** and **frame_id** thus look like so:
+Eg. In my own use case, I use a Kinect v2 One Depth Sensor. The **topics** and `frame_id` TF frame thus look like so:
 > `/kinect2/hd/points` - For 3D PointCloud
 
 > `/kinect2/hd/image_color_rect` - For Rectified 2D RGB Image
 
-> `/kinect2_rgb_optical_frame` - For frame_id
+> `/kinect2_rgb_optical_frame` - For frame_id TF frame
 
 2 . **Replace** the following lines in RVIP's launch file under the specified files below:
 
@@ -53,7 +53,7 @@ Eg. In my own use case, I use a Kinect v2 One Depth Sensor. The **topics** and *
 <remap from="camera_3d" to="/kinect2/hd/points"/>
 ```
 
-**Edit** [line 23]() of the `rvip/launch/run.launch` file to the **frame_id** you identified earlier.
+**Edit** [line 23]() of the `rvip/launch/run.launch` file to the `frame_id` TF frame you identified earlier.
 ```xml
 <param name="frame_id" value="/kinect2_rgb_optical_frame" />
 ```
