@@ -46,19 +46,7 @@ Eg. In my own use case, I use a Kinect v2 One Depth Sensor. The **topics** and `
 
 > `/kinect2_rgb_optical_frame` - For frame_id TF frame
 
-2 . **Replace** the following lines in RVIP's launch file under the specified files below:
-
-**Edit** [line 20]() of the `rvip/launch/run.launch` file to the **3D PointCloud** camera topic you identified earlier.
-```xml
-<remap from="camera_3d" to="/kinect2/hd/points"/>
-```
-
-**Edit** [line 23]() of the `rvip/launch/run.launch` file to the `frame_id` TF frame you identified earlier.
-```xml
-<param name="frame_id" value="/kinect2_rgb_optical_frame" />
-```
-
-**Edit** [line 4]() of the `darknet_ros/darknet_ros/config/ros.yaml` file to the **Rectified 2D RGB Image** you identified earlier.
+2 . **Edit** [line 4]() of the `darknet_ros/darknet_ros/config/ros.yaml` file to the **Rectified 2D RGB Image** you identified earlier.
 ```yaml
     topic: /kinect2/hd/image_color_rect
 ```
@@ -142,8 +130,8 @@ After following the instructions under **Setup**, run the commands below:
 3. **Build** your workspace.
 > `$ catkin build -DCMAKE_BUILD_TYPE=Release`
 
-4. **Run** RVIP.
-> `$ roslaunch rvip run.launch`
+4. **Run** RVIP. Replace **camera_3d_input_topic** with the **3D PointCloud** camera topic you identified earlier.
+> `$ roslaunch rvip run.launch camera_3d_input_topic:=/kinect2/hd/points camera_tf_frame:=/kinect2_rgb_optical_frame`
 
 
 ## **[Issues?]**
