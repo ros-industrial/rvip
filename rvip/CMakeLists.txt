@@ -4,16 +4,16 @@ project(rvip)
 add_compile_options(-std=c++11)
 
 find_package(catkin REQUIRED COMPONENTS
-  tf
-  rospy
-  roscpp
-  roslint
-  pcl_ros
-  std_msgs
   cv_bridge
-  sensor_msgs
   geometry_msgs
   image_transport
+  pcl_ros
+  roscpp
+  roslint
+  rospy
+  sensor_msgs
+  std_msgs
+  tf
   visualization_msgs
 )
 
