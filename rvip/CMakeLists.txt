@@ -45,12 +45,6 @@ include_directories(
 add_executable(rvip src/main.cpp)
 target_link_libraries(rvip ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
 
-if(CATKIN_ENABLE_TESTING AND ENABLE_COVERAGE_TESTING)
-  find_package(code_coverage REQUIRED)
-  # Add compiler flags for coverage instrumentation before defining any targets
-  APPEND_COVERAGE_COMPILER_FLAGS()
-endif()
-
 if(CATKIN_ENABLE_TESTING)
   roslint_cpp()
   find_package(roslaunch REQUIRED)
@@ -62,6 +56,9 @@ if(CATKIN_ENABLE_TESTING)
 
   # Create a target rvip_coverage_report
   if(ENABLE_COVERAGE_TESTING)
+    find_package(code_coverage REQUIRED)
+    # Add compiler flags for coverage instrumentation before defining any targets
+    APPEND_COVERAGE_COMPILER_FLAGS()
     add_code_coverage(
       NAME ${PROJECT_NAME}_coverage_report
       DEPENDENCIES tests
