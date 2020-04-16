@@ -46,6 +46,14 @@ add_executable(rvip src/main.cpp)
 target_link_libraries(rvip ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
 
 if(CATKIN_ENABLE_TESTING)
+
+  # Downloading test_frame.pcd used for code-coverage report generation.
+  catkin_download_test_data(
+  ${PROJECT_NAME}_test_frame.pcd
+  https://github.com/cardboardcode/test-data/raw/master/test_frame.pcd
+  DESTINATION ${PROJECT_SOURCE_DIR}/test/resrc
+  )
+
   roslint_cpp()
   find_package(roslaunch REQUIRED)
   roslaunch_add_file_check(launch)
