@@ -13,14 +13,14 @@
   <depend>cv_bridge</depend>
   <depend>geometry_msgs</depend>
   <depend>pcl_ros</depend>
+  <depend>rospy</depend>
   <depend>roscpp</depend>
   <depend>sensor_msgs</depend>
+  <depend>image_transport</depend>
   <depend>std_msgs</depend>
+  <depend>roslint</depend>
   <depend>tf</depend>
   <depend>visualization_msgs</depend>
-
-  <build_depend>image_transport</build_depend>
-  <build_depend>roslint</build_depend>
 
   <test_depend>code_coverage</test_depend>
   <test_depend>roslaunch</test_depend>
