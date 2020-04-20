@@ -42,7 +42,7 @@ int main(int argc, char **argv)
   ros::NodeHandle n;
 
   // Subscription to custom YOLO bounding boxes
-  ros::Subscriber yolo_sub = n.subscribe("/darknet_ros/bounding_boxes", 1, roiCallback);
+  ros::Subscriber yolo_sub = n.subscribe("darknet_ros/bounding_boxes", 1, roiCallback);
 
   // Publication of generic sensor_msgs RegionOfInterest message
   roi_pub = n.advertise<sensor_msgs::RegionOfInterest>("/rvip_roi_parser/roi", 1000);
