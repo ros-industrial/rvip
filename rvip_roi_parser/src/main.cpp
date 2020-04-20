@@ -5,7 +5,6 @@
 
 // Includes for ROS
 #include "ros/ros.h"
-#include "std_msgs/String.h"
 
 // Includes for ROS Image
 #include <sensor_msgs/Image.h>
