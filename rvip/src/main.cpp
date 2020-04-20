@@ -26,7 +26,7 @@
 int main(int argc, char **argv)
 {
         // Initializing ROS node
-        ros::init(argc, argv, "rvip_0.0.2");
+        ros::init(argc, argv, "rvip_main");
         ros::NodeHandle n;
 
         // Initializing RVIP object.
