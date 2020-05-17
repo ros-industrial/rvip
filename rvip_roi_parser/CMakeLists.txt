@@ -8,9 +8,19 @@ find_package(catkin REQUIRED COMPONENTS
   roscpp
   sensor_msgs
 )
-catkin_package()
+
+catkin_package(
+    CATKIN_DEPENDS
+        darknet_ros_msgs
+        roscpp
+        sensor_msgs
+)
 
 include_directories(${catkin_INCLUDE_DIRS})
 
-add_executable(rvip_roi_parser src/main.cpp)
-target_link_libraries(rvip_roi_parser ${catkin_LIBRARIES})
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES})
+
+# Install executable
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})

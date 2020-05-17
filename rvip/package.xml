@@ -2,7 +2,11 @@
 <package format="2">
   <name>rvip</name>
   <version>0.0.1</version>
-  <description>The rvip package</description>
+  <description>
+    
+    Easy integration of 2D-3D hybrid pose alignment processes
+
+  </description>
   <author>Bey Hao Yun</author>
   <maintainer email="beyhy@artc.a-star.edu.sg">Bey Hao Yun</maintainer>
 

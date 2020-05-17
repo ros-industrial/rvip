@@ -2,7 +2,11 @@
 <package format="2">
   <name>rvip_roi_parser</name>
   <version>0.0.0</version>
-  <description>The rvip_roi_parser package</description>
+  <description>
+    
+    Parse darknet_ros_msgs into the standardized sensor_msgs::RegionOfInterest message
+  
+  </description>
 
   <maintainer email="beyhy@artc.a-star.edu.sg">Bey Hao Yun</maintainer>
 
