@@ -42,8 +42,8 @@ include_directories(
   ${catkin_INCLUDE_DIRS}
 )
 
-add_executable(rvip src/main.cpp)
-target_link_libraries(rvip ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
+add_executable(${PROJECT_NAME} src/main.cpp)
+target_link_libraries(${PROJECT_NAME} ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
 
 if(CATKIN_ENABLE_TESTING)
 
@@ -59,8 +59,8 @@ if(CATKIN_ENABLE_TESTING)
   roslaunch_add_file_check(launch)
 
   find_package(rostest REQUIRED)
-  add_rostest_gtest(test_rvip test/run_test.test src/test/test_rvip.cpp)
-  target_link_libraries(test_rvip ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
+  add_rostest_gtest(test_${PROJECT_NAME} test/run_test.test src/test/test_rvip.cpp)
+  target_link_libraries(test_${PROJECT_NAME} ${catkin_LIBRARIES} ${PCL_LIBRARIES} ${OpenGR_LIBRARIES})
 
   # Create a target rvip_coverage_report
   if(ENABLE_COVERAGE_TESTING)
@@ -74,3 +74,19 @@ if(CATKIN_ENABLE_TESTING)
   endif()
 
 endif()
+
+# Install executable
+install(TARGETS ${PROJECT_NAME}
+  RUNTIME DESTINATION ${CATKIN_PACKAGE_BIN_DESTINATION})
+
+# Install header files
+install(DIRECTORY include/${PROJECT_NAME}/
+  DESTINATION ${CATKIN_PACKAGE_INCLUDE_DESTINATION})
+
+# Install launch files
+install(DIRECTORY launch/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/launch)
+
+# Install rviz config
+install(DIRECTORY rviz/
+  DESTINATION ${CATKIN_PACKAGE_SHARE_DESTINATION}/rviz)
