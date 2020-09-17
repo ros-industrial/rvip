@@ -40,7 +40,7 @@ int main(int argc, char **argv)
         // Subscription to custom ROI bounding boxes
         ros::Subscriber roi_sub = n.subscribe("rvip_roi_parser/roi", 1, &RVIPobj::roiCallBack, &object);
 
-        object.marker_pub = n.advertise<visualization_msgs::MarkerArray> ("/rvip/obj_marker", 100);
+        object.marker_pub = n.advertise<visualization_msgs::MarkerArray> ("rvip/obj_marker", 100);
 
         // Run RVIP main module
         while (ros::ok())
