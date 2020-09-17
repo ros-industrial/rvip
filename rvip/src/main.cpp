@@ -40,11 +40,6 @@ int main(int argc, char **argv)
         // Subscription to custom ROI bounding boxes
         ros::Subscriber roi_sub = n.subscribe("rvip_roi_parser/roi", 1, &RVIPobj::roiCallBack, &object);
 
-        // DEBUG Publishing PointCloud of generated cuboid
-        // object.pcl_pub = n.advertise<pcl::PointCloud<pcl::PointXYZ> >("/rvip/model_pcl", 1000);
-        // DEBUG Publishing PointCloud of dissected scene
-        // object.scene_pcl_pub = n.advertise<pcl::PointCloud<pcl::PointXYZ> >("/rvip/scene_pcl", 1000);
-        // DEBUG - Publishing marker of object detected and transformed.
         object.marker_pub = n.advertise<visualization_msgs::MarkerArray> ("/rvip/obj_marker", 100);
 
         // Run RVIP main module
