@@ -91,7 +91,7 @@ Execute the commands below in terminal to **install** the **OpenGR** library.
 3. **Replace** the `CMakeLists.txt` under `darknet_ros/darknet_ros` with the  
 `CMakeLists.txt` from [this link](https://github.com/benjaminabruzzo/darknet_ros/blob/master/darknet_ros/CMakeLists.txt).
 
-This removes reliance of CUDA temporarily to run **darknet_ros** YOLO object detection.
+This removes reliance of CUDA temporarily to run **darknet_ros** YOLO object detection. The package uses **CPU** only to enhance software portability.
 
 4. **Build** **darknet_ros** ROS package.
 > `$ catkin build darknet_ros -DCMAKE_BUILD_TYPE=Release`
