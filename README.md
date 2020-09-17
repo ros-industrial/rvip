@@ -3,6 +3,8 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gl/cardboardcode/rvip_ros/branch/master/graph/badge.svg?token=9XFJvJLbpK)](https://codecov.io/gl/cardboardcode/rvip)
 
+
+
 ## What Is This?
 
 **RVIP** is a ROS package that offers **easy integration of 2D-3D hybrid pose alignment processes** used in robotic vision applications.
@@ -65,24 +67,20 @@ RVIP estimates the height by subtracting the upper and lower z-limits.
 
 **Click** the hyperlinks for download instructions.
 
-1. [Ubuntu 18.04 (Bionic Beaver)](https://ubuntu.com/download/desktop)
+1. Ubuntu 18.04 (Bionic Beaver)
     - For the operating system
-2. [ROS Morenia Melodic](http://wiki.ros.org/melodic/Installation/Ubuntu)
+2. ROS Morenia Melodic
     - For the ROS base
 3. OpenGR
     - For pose estimation. `Refer below for download instructions.`
-4. [OpenCV 3.2.0](http://www.codebind.com/linux-tutorials/install-opencv-3-2-ubuntu-18-04-lts-linux/)
-    - For reading and displaying images
-5. [Point Cloud Library](https://askubuntu.com/questions/1134856/how-to-install-pcl-on-ubuntu-18-04)
+4. [Point Cloud Library](https://askubuntu.com/questions/1134856/how-to-install-pcl-on-ubuntu-18-04)
     - For processing 3D information
-6. darknet_ros
-    - For object recognition using only 2D RGB images. `Refer below for download instructions.`
 
 
 ## Setup
 This section provides instructions on how to install and use **RVIP**. These instructions are only to set up RVIP to run in isolation.
 
-To run RVIP as a complete robotic vision suite, please follow the instructions in [**demo.md**](demo.md).
+To run RVIP as a complete robotic vision suite, please follow the instructions in [**DEMO_README.md**](DEMO_README.md).
 
 ### There are **2** parts to the setup.
 1. **OpenGR** Setup
