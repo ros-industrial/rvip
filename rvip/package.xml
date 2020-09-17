@@ -20,12 +20,13 @@
   <depend>pcl_ros</depend>
   <depend>roscpp</depend>
   <depend>roslint</depend>
+  <depend>rviz</depend>
+  <depend>rospy</depend>
   <depend>sensor_msgs</depend>
   <depend>std_msgs</depend>
   <depend>tf</depend>
   <depend>visualization_msgs</depend>
-  <exec_depend>rviz</exec_depend>
-  <exec_depend>rospy</exec_depend>
+
 
   <test_depend>code_coverage</test_depend>
   <test_depend>roslaunch</test_depend>
