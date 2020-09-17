@@ -36,7 +36,7 @@ The flow of data using RVIP is illustrated in the following diagram.
 2. 2D RGB Camera Image (`sensor_msgs::Image`)
 
 **Outputs**:
-1. Object Centroid Position, Orientation and Dimensions (visualisation_msgs::MarkerArray,tf::Transform)
+1. Object Centroid Position, Orientation and Dimensions (`visualisation_msgs::MarkerArray`,`tf::Transform`)
 
 ![](/rvip/img/rvip_architecture.jpg)
 <center>RVIP Architecture Diagram</center>
