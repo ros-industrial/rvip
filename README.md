@@ -3,8 +3,6 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gl/cardboardcode/rvip_ros/branch/master/graph/badge.svg?token=9XFJvJLbpK)](https://codecov.io/gl/cardboardcode/rvip)
 
-
-
 ## What Is This?
 
 **RVIP** is a ROS package that offers **easy integration of 2D-3D hybrid pose alignment processes** used in robotic vision applications.
@@ -25,6 +23,9 @@ cd rvip && rosdoc_lite .
 # View the documentation on your browser.
 firefox doc/html/doc/index.html
 ```
+
+## New to **ROS**?
+Follow [these detailed instructions here](DETAILED_README.md) instead.
 
 ## How Does It Work?
 
