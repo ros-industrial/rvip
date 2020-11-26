@@ -16,7 +16,7 @@
 #include <visualization_msgs/Marker.h>
 #include <visualization_msgs/MarkerArray.h>
 #include <sensor_msgs/RegionOfInterest.h>
-
+#include <rvip_roi_parser/ROIArray.h>
 
 
 /*! \class RVIPobj
@@ -77,7 +77,7 @@ class RVIPobj
     void pclCallBack(const sensor_msgs::PointCloud2ConstPtr& pcd);
 
     /*! \brief A CallBack Function to receive 2D Bounding Box pixel coordinates value of detected object in rectified image.*/
-    void roiCallBack(const sensor_msgs::RegionOfInterestConstPtr& msg);
+    void roiCallBack(const rvip_roi_parser::ROIArrayConstPtr& msg);
 
     /*! \brief A function that broadcast the output tf::Tranform and publish the output the visualization_msgs MarkerArray*/
     void visualizeDetectionOutput(void);

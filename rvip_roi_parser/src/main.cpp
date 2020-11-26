@@ -15,23 +15,29 @@
 #include <darknet_ros_msgs/BoundingBoxes.h>
 #include <darknet_ros_msgs/BoundingBox.h>
 
+#include <rvip_roi_parser/ROIArray.h>
+
 ros::Publisher roi_pub;
 
 void roiCallback(const darknet_ros_msgs::BoundingBoxes::ConstPtr& msg)
 {
   darknet_ros_msgs::BoundingBox input;
-  sensor_msgs::RegionOfInterest output;
+  rvip_roi_parser::ROIArray output_msg;
+  sensor_msgs::RegionOfInterest detected_obj;
 
   for (int i = 0; i < msg->bounding_boxes.size(); i++){
       input = msg->bounding_boxes[i];
 
-      output.x_offset = input.xmin;
-      output.y_offset = input.ymin;
-      output.width = input.xmax - input.xmin;
-      output.height = input.ymax - input.ymin;
+      detected_obj.x_offset = input.xmin;
+      detected_obj.y_offset = input.ymin;
+      detected_obj.width = input.xmax - input.xmin;
+      detected_obj.height = input.ymax - input.ymin;
 
-      roi_pub.publish(output);
+      output_msg.rois.push_back(detected_obj);
   }
+
+  output_msg.header = msg->header;
+  roi_pub.publish(output_msg);
 
 }
 
@@ -45,7 +51,7 @@ int main(int argc, char **argv)
   ros::Subscriber yolo_sub = n.subscribe("darknet_ros/bounding_boxes", 1, roiCallback);
 
   // Publication of generic sensor_msgs RegionOfInterest message
-  roi_pub = n.advertise<sensor_msgs::RegionOfInterest>("/rvip_roi_parser/roi", 1000);
+  roi_pub = n.advertise<rvip_roi_parser::ROIArray>("/rvip_roi_parser/roi", 1000);
 
   ros::spin();
   return 0;

@@ -170,12 +170,6 @@ void getGroundPlane(pcl::PointCloud<pcl::PointXYZ>::Ptr input)
   std::vector<int> indices;
   pcl::removeNaNFromPointCloud(*input, *input, indices);
 
-  double leafsize = 0.005;
-  pcl::VoxelGrid<pcl::PointXYZ> sor;
-  sor.setInputCloud (input);
-  sor.setLeafSize (leafsize, leafsize, leafsize);
-  sor.filter (*input);
-
   // Create required parameters to be passed into standard PCL library functions for planar segmentation
   pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients ());
   pcl::PointIndices::Ptr inliers (new pcl::PointIndices ());
@@ -184,7 +178,7 @@ void getGroundPlane(pcl::PointCloud<pcl::PointXYZ>::Ptr input)
   seg.setOptimizeCoefficients (true);
   seg.setModelType (pcl::SACMODEL_PLANE);
   seg.setMethodType (pcl::SAC_RANSAC);
-  seg.setMaxIterations (100);
+  // seg.setMaxIterations (100);
   seg.setDistanceThreshold (0.01);
   seg.setInputCloud (input);
   seg.segment (*inliers, *coefficients);
@@ -256,12 +250,6 @@ void getAlignPointCloud(pcl::PointCloud<pcl::PointXYZ>::Ptr input, pcl::PointXYZ
   std::vector<int> indices;
   pcl::removeNaNFromPointCloud(*input, *input, indices);
 
-  double leafsize = 0.005;
-  pcl::VoxelGrid<pcl::PointXYZ> sor;
-  sor.setInputCloud (input);
-  sor.setLeafSize (leafsize, leafsize, leafsize);
-  sor.filter (*input);
-
   // Create required parameters to be passed into standard PCL library functions for planar segmentation
   pcl::ModelCoefficients::Ptr coefficients (new pcl::ModelCoefficients ());
   pcl::PointIndices::Ptr inliers (new pcl::PointIndices ());
@@ -288,28 +276,24 @@ sensor_msgs::PointCloud2 calculateLWH(RVIPobj &object, sensor_msgs::PointCloud2 
         // ros::WallTime start_, end_;
         // start_ = ros::WallTime::now();
 
-        sensor_msgs::PointCloud2 temp;
+        sensor_msgs::PointCloud2 warning_empty_pcl;
         // Preparing Pointcloud for processing
         auto yoloPointCloud = boost::make_shared<pcl::PointCloud<pcl::PointXYZ> >();
         pcl::PointCloud<pcl::PointXYZ>::Ptr pointCloud (new pcl::PointCloud<pcl::PointXYZ>);
         pcl::fromROSMsg(pcd, *pointCloud);
         yoloPointCloud->header.frame_id = pointCloud->header.frame_id;
         yoloPointCloud->header.stamp = pointCloud->header.stamp;
-        yoloPointCloud->is_dense = pointCloud->is_dense;
-        yoloPointCloud->width = pointCloud->width;
-        yoloPointCloud->height = pointCloud->height;
-        yoloPointCloud->points.resize(yoloPointCloud->width * yoloPointCloud->height);
+        yoloPointCloud->is_dense = true;
 
         // Filter the point cloud to derive whichever points that is in the YOLO bounding box.
         for (int y =object.ymin; y < object.ymax; y++) {
                 for (int x=object.xmin; x < object.xmax; x++) {
-
-                        auto& point = yoloPointCloud->at(x,y);
-                        point.x = pointCloud->at(x, y).x;
-                        point.y = pointCloud->at(x, y).y;
-                        point.z = pointCloud->at(x, y).z;
+                    yoloPointCloud->points.push_back(pointCloud->at(x, y));
                 }
         }
+
+        yoloPointCloud->width = object.xmax - object.xmin;
+        yoloPointCloud->height = object.ymax - object.ymin;
 
         // Assigning input to point to a copy of the scene point cloud.
         pcl::PointCloud<pcl::PointXYZ>::Ptr groundCloud (new pcl::PointCloud<pcl::PointXYZ>);
@@ -340,8 +324,8 @@ sensor_msgs::PointCloud2 calculateLWH(RVIPobj &object, sensor_msgs::PointCloud2 
         getObjectTopPlane(objplaneCloud,center,std_dev);
 
         if (objplaneCloud->points.size() == 0) {
-                ROS_WARN_STREAM("objplaneCloud size is 0 ");
-                return temp;
+            ROS_WARN_STREAM("objplaneCloud size is 0 ");
+            return warning_empty_pcl;
         }
 
         //Determining the centroid of the object plane
@@ -367,7 +351,7 @@ sensor_msgs::PointCloud2 calculateLWH(RVIPobj &object, sensor_msgs::PointCloud2 
         }
         catch (cv::Exception& e) {
                 ROS_WARN_STREAM("minAreaRect func failed.");
-                return temp;
+                return warning_empty_pcl;
         }
 
         object.obj_width = minRect.size.width;
@@ -375,8 +359,11 @@ sensor_msgs::PointCloud2 calculateLWH(RVIPobj &object, sensor_msgs::PointCloud2 
         object.obj_height = abs(center.z - plane_pos.z);
 
         // DEBUG - Check the length, width and height of object detected.
-        // ROS_INFO_STREAM("[In cuboid_generation.hpp]");
-        // ROS_INFO_STREAM("[width = " << minRect.size.width << " ,length = " << minRect.size.height << " ,height =  " << abs(center.z - plane_pos.z) << "]" );
+        // ROS_INFO_STREAM("[ In cuboid_generation.hpp ]");
+        // ROS_INFO_STREAM(std::endl <<
+        //                 "[ width ] = " << object.obj_width << std::endl <<
+        //                 "[ length ] = " << object.obj_length << std::endl <<
+        //                 "[ height ] =  " << object.obj_height<< std::endl);
 
         createCuboid(object, minRect.size.height, minRect.size.width, abs(center.z - plane_pos.z));
 

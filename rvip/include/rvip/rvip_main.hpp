@@ -45,43 +45,46 @@ void RVIPobj::pclCallBack(const sensor_msgs::PointCloud2ConstPtr& pcd){
 
 }
 
-void RVIPobj::roiCallBack(const sensor_msgs::RegionOfInterestConstPtr& msg){
+void RVIPobj::roiCallBack(const rvip_roi_parser::ROIArrayConstPtr& msg){
 
-  // ROS_INFO_STREAM("[ RECEIVED ] - RegionOfInterest.");
+    // ROS_INFO_STREAM("[ RECEIVED ] - RegionOfInterest.");
+    sensor_msgs::RegionOfInterest input;
 
-  sensor_msgs::RegionOfInterest input;
+    for (size_t i = 0; i < msg->rois.size(); i++) {
+      input = msg->rois[i];
 
-    input = *msg;
+      int x_diff = input.width;
+      int y_diff = input.height;
 
-    int x_diff = input.width;
-    int y_diff = input.height;
-
-    // Reject bounding box if it is less than 70 pixels wide.
-    // Such bounding boxes are certain to produce invalid cuboid.
-    if (x_diff <= 70 || y_diff <=70){
-      return;
-    }
-
-    // If boxes vector array is empty, assign and skip the latter for loop evaluation.
-    if (boxes.size() == 0){
-        boxes.push_back(input);
-        return;
-    }
-    // Filter out any bounding boxes which are within a larger bounding box.
-    // Iterate through boxes vector array and compare with each box in list.
-    for (int j = 0; j < boxes.size(); j++){
-      // If the box in the list is encapsulated by the box to be added,
-      // Replace the box in the list with the box to be added.
-      // Otherwise, ignore the box to be added.
-      if (isWithinBoundingBox(boxes.at(j),input)){
-         boxes.erase(boxes.begin()+j);
-         boxes.insert(boxes.begin()+j, input);
+      // Reject bounding box if it is less than 70 pixels wide.
+      // Such bounding boxes are certain to produce invalid cuboid.
+      if (x_diff <= 70 || y_diff <=70){
+        continue;
       }
-      else{
-         boxes.push_back(input);
-         break;
+
+      // If boxes vector array is empty, assign and skip the latter for loop evaluation.
+      if (boxes.size() == 0){
+          boxes.push_back(input);
+          continue;
+      }
+      // Filter out any bounding boxes which are within a larger bounding box.
+      // Iterate through boxes vector array and compare with each box in list.
+      for (int j = 0; j < boxes.size(); j++){
+        // If the box in the list is encapsulated by the box to be added,
+        // Replace the box in the list with the box to be added.
+        // Otherwise, ignore the box to be added.
+        if (isWithinBoundingBox(boxes.at(j),input)){
+           boxes.erase(boxes.begin()+j);
+           boxes.insert(boxes.begin()+j, input);
+        }
+        else{
+           boxes.push_back(input);
+           break;
+        }
       }
     }
+
+
 
 }
 
@@ -91,6 +94,7 @@ void RVIPobj::visualizeDetectionOutput(void){
   for (int i = 0; i < obj_tfs.size(); i++){
     br.sendTransform(tf::StampedTransform(obj_tfs.at(i), ros::Time::now(), frame_id, "object_" + std::to_string(i)));
   }
+
   // DEBUG
   marker_pub.publish(obj_markers);
 }
@@ -122,19 +126,25 @@ void RVIPobj::run(void){
           // 3. A cuboid point cloud that will be used to localize the object.
           yolo_pcl = calculateLWH(*this, raw_pointcloud);
 
+          if (yolo_pcl.data.size() == 0) {
+            ROS_WARN_STREAM("[ WARNING ] - Safeguard Triggered.");
+            continue;
+          }
           // Returns a labelled tf frame and a grasp validation message.
           alignPose(*this, yolo_pcl);
       }
       catch(pcl:: PCLException& e) {
+          ROS_INFO_STREAM(e.getFunctionName());
           ROS_INFO_STREAM(e.detailedMessage());
           ROS_WARN_STREAM("Exception caught. Exiting safe.");
           return;
       }
 
-      }
+  }
 
       // Only when objects has been detected and localized, visualization of said objects is executed.
       if (obj_tfs.size() > 0){
+          ROS_INFO_STREAM("[ No. of Localized Object ] = " << obj_tfs.size());
           visualizeDetectionOutput();
       }
 

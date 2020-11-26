@@ -15,6 +15,7 @@ find_package(catkin REQUIRED COMPONENTS
   std_msgs
   tf
   visualization_msgs
+  rvip_roi_parser
 )
 
 # DEPENDENCIES
@@ -40,6 +41,7 @@ catkin_package( CATKIN_DEPENDS
   std_msgs
   tf
   visualization_msgs
+  rvip_roi_parser
 )
 
 include_directories(
