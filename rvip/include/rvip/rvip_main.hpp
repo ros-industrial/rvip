@@ -39,11 +39,15 @@ bool RVIPobj::isWithinBoundingBox(sensor_msgs::RegionOfInterest box_in_list, sen
 
 void RVIPobj::pclCallBack(const sensor_msgs::PointCloud2ConstPtr& pcd){
 
+  // ROS_INFO_STREAM("[ RECEIVED ] - Input PointCloud.");
+
   raw_pointcloud = *pcd;
 
 }
 
 void RVIPobj::roiCallBack(const sensor_msgs::RegionOfInterestConstPtr& msg){
+
+  // ROS_INFO_STREAM("[ RECEIVED ] - RegionOfInterest.");
 
   sensor_msgs::RegionOfInterest input;
 
@@ -122,7 +126,7 @@ void RVIPobj::run(void){
           alignPose(*this, yolo_pcl);
       }
       catch(pcl:: PCLException& e) {
-          ROS_WARN_STREAM("[pcl::KdTreeFLANN::setInputCloud] Cannot create a KDTree with an empty input cloud!\n");
+          ROS_INFO_STREAM(e.detailedMessage());
           ROS_WARN_STREAM("Exception caught. Exiting safe.");
           return;
       }

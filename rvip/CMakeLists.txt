@@ -18,8 +18,14 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 # DEPENDENCIES
+find_package(Eigen3 REQUIRED)
 find_package(OpenGR REQUIRED PATHS /usr/local/lib/cmake)
-find_package(PCL 1.8 REQUIRED)
+
+if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
+     set(CMAKE_SUPPRESS_DEVELOPER_WARNINGS 1 CACHE INTERNAL "No dev warnings")
+endif()
+
+find_package(PCL REQUIRED)
 
 add_definitions(${PCL_DEFINITIONS} )
 
@@ -40,6 +46,7 @@ catkin_package( CATKIN_DEPENDS
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
+  ${EIGEN3_INCLUDE_DIR}
 )
 
 add_executable(${PROJECT_NAME} src/main.cpp)

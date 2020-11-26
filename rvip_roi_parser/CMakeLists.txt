@@ -9,11 +9,10 @@ find_package(catkin REQUIRED COMPONENTS
   sensor_msgs
 )
 
-catkin_package(
-    CATKIN_DEPENDS
-        darknet_ros_msgs
-        roscpp
-        sensor_msgs
+catkin_package( CATKIN_DEPENDS
+  darknet_ros_msgs
+  roscpp
+  sensor_msgs
 )
 
 include_directories(${catkin_INCLUDE_DIRS})
