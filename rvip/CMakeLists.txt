@@ -18,7 +18,6 @@ find_package(catkin REQUIRED COMPONENTS
 )
 
 # DEPENDENCIES
-find_package(Eigen3 REQUIRED)
 find_package(OpenGR REQUIRED PATHS /usr/local/lib/cmake)
 
 if(NOT DEFINED CMAKE_SUPPRESS_DEVELOPER_WARNINGS)
@@ -46,7 +45,6 @@ catkin_package( CATKIN_DEPENDS
 include_directories(
   include
   ${catkin_INCLUDE_DIRS}
-  ${EIGEN3_INCLUDE_DIR}
 )
 
 add_executable(${PROJECT_NAME} src/main.cpp)
