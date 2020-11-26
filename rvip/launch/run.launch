@@ -19,7 +19,7 @@
 
   <node pkg="rvip" name="rvip_package" type="rvip" output="screen" respawn="true">
     <remap from="camera_3d" to="$(arg camera_3d_input_topic)"/>
-    <param name="frame_id" value="(arg camera_tf_frame)"/>
+    <param name="frame_id" value="$(arg camera_tf_frame)"/>
   </node>
 
 </launch>
