@@ -3,7 +3,7 @@
 [![License](https://img.shields.io/badge/License-BSD%203--Clause-blue.svg)](https://opensource.org/licenses/BSD-3-Clause)
 [![codecov](https://codecov.io/gl/cardboardcode/rvip_ros/branch/master/graph/badge.svg?token=9XFJvJLbpK)](https://codecov.io/gl/cardboardcode/rvip)
 
-## What Is This?
+## **What Is This?**
 
 **RVIP** is a ROS package that offers **easy integration of 2D-3D hybrid pose alignment processes** used in robotic vision applications.
 
@@ -27,7 +27,7 @@ firefox doc/html/doc/index.html
 ## New to **ROS**?
 Follow [these detailed instructions here](DETAILED_README.md) instead.
 
-## How Does It Work?
+## **How Does It Work?**
 
 The flow of data using RVIP is illustrated in the following diagram.
 
@@ -41,7 +41,7 @@ The flow of data using RVIP is illustrated in the following diagram.
 ![](/rvip/img/rvip_architecture.jpg)
 <center>RVIP Architecture Diagram</center>
 
-### Stages
+### **Stages**
 **[1]** - **3D PointCloud** and rectified **2D RGB Camera Image** are received from a 3D stereo-vision camera such as the Kinect ONE V2.
 
 **[2]** - The rectified **2D RGB Camera Image** are given to an external ROS package that houses its own 2D Computer Vision Architecture. An example would be [darknet_ros](https://github.com/leggedrobotics/darknet_ros).
@@ -63,7 +63,7 @@ RVIP estimates the height by subtracting the upper and lower z-limits.
 
 ****
 
-### Requirements
+### **Requirements**
 #### This section lists all third-party softwares used by **RVIP**.
 
 **Click** the hyperlinks for download instructions.
@@ -78,7 +78,7 @@ RVIP estimates the height by subtracting the upper and lower z-limits.
     - For processing 3D information
 
 
-## Setup
+## **Setup**
 This section provides instructions on how to install and use **RVIP**. These instructions are only to set up RVIP to run in isolation.
 
 To run RVIP as a complete robotic vision suite, please follow the instructions in [**DEMO_README.md**](DEMO_README.md).
@@ -90,60 +90,100 @@ To run RVIP as a complete robotic vision suite, please follow the instructions i
 # !**`WARNING`**!
 > [WIP] The **OpenGR** library used in 0.0.1 alpha version is an outdated version. Please follow the instructions below to download the specific version of OpenGR highlighted.
 
-### [OpenGR Setup]
+### [ **OpenGR Setup** ]
 
 1. **Download** the OpenGR library source codes from its GitHub repo.
-> `$ git clone https://github.com/STORM-IRIT/OpenGR.git`
+
+    ```bash
+    git clone https://github.com/STORM-IRIT/OpenGR.git
+    ```
 
 2. **Go** into the **OpenGR** directory
-> `$ cd OpenGR`
-3. **Git Revert** to the specified version of OpenGR.
-> `$ git reset --hard 0967cd880950b35786b8fd098837c9eb1fe2aca4`
 
-![](/rvip/img/opengr_commit.png)
-**Click** [here](https://github.com/STORM-IRIT/OpenGR/commit/0967cd880950b35786b8fd098837c9eb1fe2aca4) to go to the webpage with this commit.
+    ```bash
+    cd OpenGR
+    ```
+
+3. **Git Revert** to the specified version of OpenGR.
+
+    ```bash
+    git reset --hard 0967cd880950b35786b8fd098837c9eb1fe2aca4
+    ```
+
+    ![](/rvip/img/opengr_commit.png)
+    **Click** [here](https://github.com/STORM-IRIT/OpenGR/commit/0967cd880950b35786b8fd098837c9eb1fe2aca4) to go to the webpage with this commit.
 
 4. **Create** and **Go** to a build directory
-> `$ mkdir build && cd build`
+
+    ```bash
+    mkdir build && cd build
+    ```
 
 5. **Build** the **OpenGR** using cmake.
-> `$ cmake -DCMAKE_BUILD_TYPE=Release ..`
+
+    ```bash
+    cmake -DCMAKE_BUILD_TYPE=Release ..
+    ```
 
 6. **Install** the **OpenGR** into your local workstation.
-> `$ sudo make install`
 
-### [RVIP Setup]
+    ```bash
+    sudo make install
+    ```
+
+### [ **RVIP Setup** ]
 
 1. **Download** this repository via SSH into the `src` directory of your **catkin** workspace.
-> `$ cd path/to/your/<workspace_name>/src`
->
-> `$ git clone https://github.com/cardboardcode/rvip.git`
+
+    ```bash
+    cd path/to/your/<workspace_name>/src
+
+    git clone https://github.com/cardboardcode/rvip.git
+    ```
 
 2. **Build** **RVIP** ROS package.
-> `$ catkin build rvip -DCMAKE_BUILD_TYPE=Release`
+
+    ```bash
+    catkin build rvip -DCMAKE_BUILD_TYPE=Release
+    ```
 
 3. **Source** your workspace.
-> `$ source path/to/your/<workspace_name>/devel/setup.bash`
+
+    ```bash
+    source path/to/your/<workspace_name>/devel/setup.bash
+    ```
 
 # **Run**
 After following the instructions under **Setup**, run the commands below:
 
 1. Go to the root of your catkin workspace.
-> `$ cd path/to/your/\<workspace_name>/``
+
+    ```bash
+    cd path/to/your/\<workspace_name>/
+    ```
 
 2. **Source** your workspace..
-> `$ source path/to/your/<workspace_name>/devel/setup.bash`
+
+    ```bash
+    source path/to/your/<workspace_name>/devel/setup.bash
+    ```
 
 3. **Build** your workspace.
-> `$ catkin build -DCMAKE_BUILD_TYPE=Release`
+
+    ```bash
+    catkin build -DCMAKE_BUILD_TYPE=Release
+    ```
 
 4. **Run** RVIP.
-> `$ roslaunch rvip run.launch debug:=false`
 
-## Nodes
+    ```bash
+    roslaunch rvip run.launch debug:=false
+    ```
+
+## **Nodes**
 **RVIP** is represented by the `rvip` directory in this repository. It is a single ROS node.
 
-#### Subscribed Topics
+#### **Subscribed Topics**
 
 * `/camera_3d` ([sensor_msgs/PointCloud2])
 
@@ -153,7 +193,7 @@ After following the instructions under **Setup**, run the commands below:
 
     The **RegionOfInterest** data (xmin, xmax, ymin, ymax, do_rectify) of detected objects outputed by **2D Computer Architectures**.
 
-#### Published Topics
+#### **Published Topics**
 
 * `/rvip/model_pcl` ([pcl/PointCloud<pcl/PointXYZ>])
 
@@ -167,11 +207,11 @@ After following the instructions under **Setup**, run the commands below:
 
     Allows visualization of the generated cuboid containing information highlighted in the diagram above.
 
-## FAQ
+## **FAQ**
 
 1. What is the use of `rvip_roi_parser`?
 
 Please refer to [README.md under rvip_roi_parser](/rvip_roi_parser/README.md).
 
-## Acknowledgement
+## **Acknowledgement**
 Credits to **ROS-Industrial Consortium Asia Pacific** for providing the opportunity and industrial resources used in developing and testing this project.
